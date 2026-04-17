@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Panshi Restaurant | সাধ্যের মধ্যে বাংলা খাবারের আসল স্বাদ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    primary: '#c40000',
+                    'primary-dark': '#9e0000',
+                    'primary-light': '#e83333',
+                    cream: '#fff8f0',
+                    'cream-dark': '#f5ebe0',
+                    gold: '#d4a574',
+                    'gold-light': '#e8c9a0',
+                    bark: { 50:'#fdf8f4',100:'#f0e0d0',200:'#e0c8b0',300:'#d4a574',400:'#b8864a',500:'#8b5e34',600:'#5c3a1e',700:'#3d2510',800:'#2d1a0e',900:'#1a0f08' }
+                },
+                fontFamily: {
+                    bn: ['"Noto Sans Bengali"', 'sans-serif'],
+                    play: ['"Playfair Display"', 'serif'],
+                }
+            }
+        }
+    }
+    </script>
+    <style>
+        html{scroll-behavior:smooth}
+        ::-webkit-scrollbar{width:7px}
+        ::-webkit-scrollbar-track{background:#fff8f0}
+        ::-webkit-scrollbar-thumb{background:#c40000;border-radius:9px}
+        .hero-overlay{background:linear-gradient(135deg,rgba(26,15,8,.88) 0%,rgba(196,0,0,.55) 50%,rgba(26,15,8,.82) 100%)}
+        .bengali-pattern{background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30Z' fill='none' stroke='%23c4000006' stroke-width='.5'/%3E%3Ccircle cx='30' cy='30' r='7' fill='none' stroke='%23c4000005' stroke-width='.5'/%3E%3C/svg%3E")}
+        .texture-dots::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg width='30' height='30' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='15' cy='15' r='.6' fill='%230000000a'/%3E%3C/svg%3E");pointer-events:none;z-index:0}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes fadeLeft{from{opacity:0;transform:translateX(-32px)}to{opacity:1;transform:translateX(0)}}
+        @keyframes fadeRight{from{opacity:0;transform:translateX(32px)}to{opacity:1;transform:translateX(0)}}
+        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+        @keyframes pulseGlow{0%,100%{box-shadow:0 0 0 0 rgba(196,0,0,.4)}50%{box-shadow:0 0 0 14px rgba(196,0,0,0)}}
+        @keyframes spin-slow{to{transform:rotate(360deg)}}
+        .reveal{opacity:0;transform:translateY(30px);transition:all .8s cubic-bezier(.22,1,.36,1)}
+        .reveal.active{opacity:1;transform:translateY(0)}
+        .menu-card{transition:all .35s cubic-bezier(.22,1,.36,1)}
+        .menu-card:hover{transform:translateY(-8px);box-shadow:0 24px 48px rgba(196,0,0,.1)}
+        .menu-card:hover .m-img{transform:scale(1.1)}
+        .m-img{transition:transform .5s cubic-bezier(.22,1,.36,1)}
+        .nav-link{position:relative;transition:color .2s}
+        .nav-link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:#c40000;transition:width .3s}
+        .nav-link:hover::after,.nav-link.active::after{width:100%}
+        .nav-link:hover,.nav-link.active{color:#c40000}
+        .cat-tab{transition:all .25s}
+        .cat-tab.active{background:#c40000;color:#fff;box-shadow:0 4px 16px rgba(196,0,0,.3)}
+        .whatsapp-float{animation:pulseGlow 2s ease-in-out infinite}
+        .mobile-menu{transform:translateX(100%);transition:transform .35s cubic-bezier(.22,1,.36,1)}
+        .mobile-menu.open{transform:translateX(0)}
+        .toast{transform:translateY(120px);opacity:0;transition:all .4s ease}
+        .toast.show{transform:translateY(0);opacity:1}
+        .bengali-divider{display:flex;align-items:center;gap:14px}
+        .bengali-divider::before,.bengali-divider::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,#c40000,transparent)}
+        .hero-deco{animation:spin-slow 40s linear infinite}
+        .popular-badge{animation:pulseGlow 2s ease-in-out infinite}
+        input:focus,textarea:focus,select:focus{outline:none;border-color:#c40000;box-shadow:0 0 0 3px rgba(196,0,0,.1)}
+    </style>
+</head>
+<body class="font-bn bg-cream text-bark-800 overflow-x-hidden">
+
+<!-- ========== TOAST ========== -->
+<div id="toast" class="toast fixed bottom-28 right-6 z-[1000] bg-bark-900 text-white px-6 py-3 rounded-xl shadow-2xl flex items-center gap-3 text-sm">
+    <span class="iconify text-green-400 text-xl" data-icon="lucide:check-circle"></span>
+    <span id="toastMsg">Message sent!</span>
+</div>
+
+<!-- ========== WHATSAPP FLOAT ========== -->
+<a href="https://wa.me/8801XXXXXXXXX?text=আমি%20একটি%20অর্ডার%20করতে%20চাই" target="_blank"
+   class="whatsapp-float fixed bottom-6 right-6 z-[999] w-14 h-14 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center shadow-2xl transition-colors">
+    <span class="iconify text-white text-3xl" data-icon="mdi:whatsapp"></span>
+</a>
+
+<!-- ========== NAVBAR ========== -->
+<nav id="navbar" class="fixed top-0 w-full z-[100] transition-all duration-500">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16 md:h-20">
+            <!-- Logo -->
+            <a href="#home" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 md:w-12 md:h-12 bg-primary rounded-lg flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+                    <span class="text-white font-bold text-lg md:text-xl">প</span>
+                </div>
+                <div class="hidden sm:block">
+                    <div class="text-lg font-bold text-bark-900 leading-tight tracking-tight">The Panshi</div>
+                    <div class="text-[10px] text-bark-400 uppercase tracking-[0.2em]">Restaurant</div>
+                </div>
+            </a>
+            <!-- Desktop Nav -->
+            <div class="hidden lg:flex items-center gap-8">
+                <a href="#home" class="nav-link text-sm font-medium text-bark-600 active" data-section="home">হোম</a>
+                <a href="#menu" class="nav-link text-sm font-medium text-bark-600" data-section="menu">মেনু</a>
+                <a href="#about" class="nav-link text-sm font-medium text-bark-600" data-section="about">আমাদের সম্পর্কে</a>
+                <a href="#contact" class="nav-link text-sm font-medium text-bark-600" data-section="contact">যোগাযোগ</a>
+            </div>
+            <!-- CTA + Hamburger -->
+            <div class="flex items-center gap-3">
+                <a href="#menu" class="hidden md:inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-all shadow-lg hover:shadow-xl hover:shadow-red-200">
+                    <span class="iconify text-base" data-icon="lucide:utensils-crossed"></span>
+                    অর্ডার করুন
+                </a>
+                <button id="menuToggle" class="lg:hidden w-10 h-10 flex items-center justify-center rounded-lg hover:bg-bark-100 transition-colors">
+                    <span class="iconify text-2xl text-bark-800" data-icon="lucide:menu" id="menuIcon"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- ========== MOBILE MENU ========== -->
+<div id="mobileMenu" class="mobile-menu fixed inset-y-0 right-0 w-72 bg-white z-[110] shadow-2xl">
+    <div class="p-6">
+        <div class="flex items-center justify-between mb-8">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">প</span>
+                </div>
+                <div class="font-bold text-bark-900">The Panshi</div>
+            </div>
+            <button id="menuClose" class="w-9 h-9 flex items-center justify-center rounded-lg hover:bg-bark-100">
+                <span class="iconify text-xl text-bark-600" data-icon="lucide:x"></span>
+            </button>
+        </div>
+        <div class="flex flex-col gap-1">
+            <a href="#home" class="mobile-nav-link flex items-center gap-3 px-4 py-3 rounded-xl text-bark-700 hover:bg-primary hover:text-white transition-all font-medium">
+                <span class="iconify text-lg" data-icon="lucide:home"></span>হোম
+            </a>
+            <a href="#menu" class="mobile-nav-link flex items-center gap-3 px-4 py-3 rounded-xl text-bark-700 hover:bg-primary hover:text-white transition-all font-medium">
+                <span class="iconify text-lg" data-icon="lucide:book-open"></span>মেনু
+            </a>
+            <a href="#about" class="mobile-nav-link flex items-center gap-3 px-4 py-3 rounded-xl text-bark-700 hover:bg-primary hover:text-white transition-all font-medium">
+                <span class="iconify text-lg" data-icon="lucide:info"></span>আমাদের সম্পর্কে
+            </a>
+            <a href="#contact" class="mobile-nav-link flex items-center gap-3 px-4 py-3 rounded-xl text-bark-700 hover:bg-primary hover:text-white transition-all font-medium">
+                <span class="iconify text-lg" data-icon="lucide:phone"></span>যোগাযোগ
+            </a>
+        </div>
+        <div class="mt-8 p-4 bg-cream rounded-xl border border-bark-100">
+            <p class="text-xs text-bark-500 mb-2">সরাসরি অর্ডার করুন</p>
+            <a href="tel:+8801XXXXXXXXX" class="flex items-center gap-2 text-primary font-semibold text-sm">
+                <span class="iconify" data-icon="lucide:phone-call"></span>01XXXXXXXXX
+            </a>
+        </div>
+    </div>
+</div>
+<div id="menuOverlay" class="fixed inset-0 bg-black/40 z-[105] hidden opacity-0 transition-opacity duration-300"></div>
+
+<!-- ========== HERO ========== -->
+<section id="home" class="relative min-h-screen flex items-center overflow-hidden">
+    <!-- BG Image -->
+    <div class="absolute inset-0">
+        <img src="https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?w=1920&q=80" alt="Bangladeshi Food" class="w-full h-full object-cover">
+        <div class="hero-overlay absolute inset-0"></div>
+    </div>
+    <!-- Decorative -->
+    <div class="absolute top-20 right-10 w-64 h-64 border border-white/5 rounded-full hero-deco hidden lg:block"></div>
+    <div class="absolute bottom-20 left-10 w-40 h-40 border border-white/5 rounded-full hero-deco hidden lg:block" style="animation-direction:reverse;animation-duration:30s"></div>
+    <!-- Content -->
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 w-full">
+        <div class="max-w-3xl">
+            <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/10 rounded-full px-4 py-2 mb-6" style="animation:fadeUp .8s ease-out .1s both">
+                <span class="w-2 h-2 bg-primary rounded-full"></span>
+                <span class="text-white/80 text-sm">চকবাজার, ঢাকা</span>
+            </div>
+            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.1] mb-6" style="animation:fadeUp .8s ease-out .25s both">
+                সাধ্যের মধ্যে<br>
+                <span class="text-primary-light">বাংলা খাবারের</span><br>
+                আসল স্বাদ
+            </h1>
+            <p class="text-lg sm:text-xl text-white/70 mb-10 max-w-xl leading-relaxed" style="animation:fadeUp .8s ease-out .4s both">
+                ভাত, মাছ, ভর্তা, বিরিয়ানি — দাদু-দাদীর রেসিপিতে তৈরি, গ্রাম-বাংলার সেই আসল স্বাদ।
+            </p>
+            <div class="flex flex-wrap gap-4" style="animation:fadeUp .8s ease-out .55s both">
+                <a href="#menu" class="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-bold px-8 py-4 rounded-xl transition-all shadow-xl hover:shadow-2xl hover:shadow-red-900/30 text-lg">
+                    <span class="iconify" data-icon="lucide:book-open"></span>
+                    মেনু দেখুন
+                </a>
+                <a href="https://wa.me/8801XXXXXXXXX?text=আমি%20একটি%20অর্ডার%20করতে%20চাই" target="_blank" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 text-white font-semibold px-8 py-4 rounded-xl transition-all text-lg">
+                    <span class="iconify text-green-400 text-xl" data-icon="mdi:whatsapp"></span>
+                    অর্ডার করুন
+                </a>
+            </div>
+            <!-- Stats -->
+            <div class="flex flex-wrap gap-8 mt-14" style="animation:fadeUp .8s ease-out .7s both">
+                <div>
+                    <div class="text-3xl font-bold text-white">৫০+</div>
+                    <div class="text-white/50 text-sm">খাবারের আইটেম</div>
+                </div>
+                <div class="w-px bg-white/10"></div>
+                <div>
+                    <div class="text-3xl font-bold text-white">৪.৮</div>
+                    <div class="text-white/50 text-sm">গ্রাহক রেটিং</div>
+                </div>
+                <div class="w-px bg-white/10"></div>
+                <div>
+                    <div class="text-3xl font-bold text-white">১০+</div>
+                    <div class="text-white/50 text-sm">বছরের অভিজ্ঞতা</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/40" style="animation:fadeUp .8s ease-out .9s both">
+        <span class="text-xs tracking-widest uppercase">স্ক্রল করুন</span>
+        <span class="iconify text-xl animate-bounce" data-icon="lucide:chevron-down"></span>
+    </div>
+</section>
+
+<!-- ========== INTRO ========== -->
+<section class="relative py-20 md:py-28 bengali-pattern texture-dots">
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <!-- Image -->
+            <div class="reveal">
+                <div class="relative">
+                    <div class="absolute -top-4 -left-4 w-24 h-24 border-t-4 border-l-4 border-primary rounded-tl-2xl"></div>
+                    <div class="absolute -bottom-4 -right-4 w-24 h-24 border-b-4 border-r-4 border-primary rounded-br-2xl"></div>
+                    <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800&q=80" alt="Traditional Bengali Dining" class="w-full h-[400px] lg:h-[500px] object-cover rounded-2xl shadow-2xl">
+                    <!-- Floating badge -->
+                    <div class="absolute -bottom-6 -right-6 md:right-8 bg-white rounded-2xl shadow-xl p-4 flex items-center gap-3" style="animation:float 3s ease-in-out infinite">
+                        <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
+                            <span class="iconify text-primary text-2xl" data-icon="lucide:flame"></span>
+                        </div>
+                        <div>
+                            <div class="font-bold text-bark-900">ঐতিহ্যবাহী</div>
+                            <div class="text-xs text-bark-400">রান্নার পদ্ধতি</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Text -->
+            <div class="reveal" style="transition-delay:.2s">
+                <div class="bengali-divider text-primary text-sm font-semibold mb-4">
+                    <span>আমাদের কথা</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-bark-900 leading-tight mb-6">
+                    বাংলার মাটির স্বাদ,<br>
+                    <span class="text-primary">পাংশির হাতের ছোঁয়ায়</span>
+                </h2>
+                <p class="text-bark-500 text-lg leading-relaxed mb-6">
+                    "The Panshi Restaurant" শুধু একটি খাবারের দোকান নয় — এটি বাংলাদেশের ঐতিহ্যবাহী রান্নার এক টুকরো। আমাদের প্রতিটি খাবার তৈরি হয় দাদু-দাদীর হাতের রেসিপি থেকে, খাঁটি দেশি মশলায়, প্রাকৃতিক উপাদানে।
+                </p>
+                <p class="text-bark-500 leading-relaxed mb-8">
+                    চকবাজারের বুকে বসে যখন এক প্লেট ভাতের সাথে ইলিশ ভাজা আর শুকনা মরিচের ভর্তা পৌঁছায় আপনার সামনে, তখন মনে হবে মা রান্না করেছেন। সেই অনুভূতিই আমাদের লক্ষ্য।
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#about" class="inline-flex items-center gap-2 bg-bark-900 hover:bg-bark-800 text-white font-semibold px-6 py-3 rounded-xl transition-all">
+                        আরও জানুন
+                        <span class="iconify" data-icon="lucide:arrow-right"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FEATURED DISHES ========== -->
+<section class="py-20 md:py-28 bg-bark-900 relative overflow-hidden">
+    <div class="absolute inset-0 bengali-pattern opacity-30"></div>
+    <div class="absolute top-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-[120px]"></div>
+    <div class="absolute bottom-0 right-0 w-72 h-72 bg-gold/10 rounded-full blur-[100px]"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 reveal">
+            <div class="bengali-divider text-primary-light text-sm font-semibold mb-4 max-w-xs mx-auto">
+                <span>জনপ্রিয় খাবার</span>
+            </div>
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-4">
+                আমাদের <span class="text-primary-light">বিশেষ</span> আইটেম
+            </h2>
+            <p class="text-bark-300 max-w-lg mx-auto">এই খাবারগুলো আমাদের পরিচয় — গ্রাহকদের সবচেয়ে পছন্দের তালিকায় সবার উপরে</p>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Featured 1 -->
+            <div class="reveal group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:border-primary/40 transition-all duration-300" style="transition-delay:.1s">
+                <div class="relative h-52 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1633945274405-b6c8069047b0?w=500&q=80" alt="কাচ্চি বিরিয়ানি" class="w-full h-full object-cover m-img group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute top-3 left-3 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full popular-badge">⭐ জনপ্রিয়</div>
+                </div>
+                <div class="p-5">
+                    <h3 class="text-white font-bold text-lg mb-1">কাচ্চি বিরিয়ানি</h3>
+                    <p class="text-bark-400 text-sm mb-3">খাঁটি ঘি ও দেশি মশলায়</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-primary-light font-bold text-xl">৳২৫০</span>
+                        <a href="https://wa.me/8801XXXXXXXXX?text=আমি%20কাচ্চি%20বিরিয়ানি%20অর্ডার%20করতে%20চাই" target="_blank" class="w-9 h-9 bg-primary/20 hover:bg-primary rounded-lg flex items-center justify-center transition-colors">
+                            <span class="iconify text-white" data-icon="mdi:whatsapp"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Featured 2 -->
+            <div class="reveal group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:border-primary/40 transition-all duration-300" style="transition-delay:.2s">
+                <div class="relative h-52 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=500&q=80" alt="ইলিশ ভাজা" class="w-full h-full object-cover m-img group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute top-3 left-3 bg-gold text-bark-900 text-xs font-bold px-3 py-1 rounded-full">🏆 সেরা</div>
+                </div>
+                <div class="p-5">
+                    <h3 class="text-white font-bold text-lg mb-1">ইলিশ মাছ ভাজা</h3>
+                    <p class="text-bark-400 text-sm mb-3">পদ্মার তাজা ইলিশ</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-primary-light font-bold text-xl">৳২৫০</span>
+                        <a href="https://wa.me/8801XXXXXXXXX?text=আমি%20ইলিশ%20ভাজা%20অর্ডার%20করতে%20চাই" target="_blank" class="w-9 h-9 bg-primary/20 hover:bg-primary rounded-lg flex items-center justify-center transition-colors">
+                            <span class="iconify text-white" data-icon="mdi:whatsapp"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Featured 3 -->
+            <div class="reveal group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:border-primary/40 transition-all duration-300" style="transition-delay:.3s">
+                <div class="relative h-52 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1645696996762-9a0536546e23?w=500&q=80" alt="মাটন কষা" class="w-full h-full object-cover m-img group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute top-3 left-3 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full popular-badge">⭐ জনপ্রিয়</div>
+                </div>
+                <div class="p-5">
+                    <h3 class="text-white font-bold text-lg mb-1">মাটন কষা</h3>
+                    <p class="text-bark-400 text-sm mb-3">ঘন ঝোলে রান্না করা</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-primary-light font-bold text-xl">৳৩০০</span>
+                        <a href="https://wa.me/8801XXXXXXXXX?text=আমি%20মাটন%20কষা%20অর্ডার%20করতে%20চাই" target="_blank" class="w-9 h-9 bg-primary/20 hover:bg-primary rounded-lg flex items-center justify-center transition-colors">
+                            <span class="iconify text-white" data-icon="mdi:whatsapp"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Featured 4 -->
+            <div class="reveal group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:border-primary/40 transition-all duration-300" style="transition-delay:.4s">
+                <div class="relative h-52 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=500&q=80" alt="মুরগির রোস্ট" class="w-full h-full object-cover m-img group-hover:scale-110 transition-transform duration-700">
+                </div>
+                <div class="p-5">
+                    <h3 class="text-white font-bold text-lg mb-1">মুরগির রোস্ট</h3>
+                    <p class="text-bark-400 text-sm mb-3">দেশি মুরগি, ঐতিহ্যবাহী</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-primary-light font-bold text-xl">৳১৮০</span>
+                        <a href="https://wa.me/8801XXXXXXXXX?text=আমি%20মুরগির%20রোস্ট%20অর্ডার%20করতে%20চাই" target="_blank" class="w-9 h-9 bg-primary/20 hover:bg-primary rounded-lg flex items-center justify-center transition-colors">
+                            <span class="iconify text-white" data-icon="mdi:whatsapp"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FULL MENU ========== -->
+<section id="menu" class="py-20 md:py-28 bengali-pattern texture-dots relative">
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 reveal">
+            <div class="bengali-divider text-primary text-sm font-semibold mb-4 max-w-xs mx-auto">
+                <span>আমাদের মেনু</span>
+            </div>
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-bark-900 mb-4">
+                সম্পূর্ণ <span class="text-primary">মেনু</span>
+            </h2>
+            <p class="text-bark-500 max-w-lg mx-auto">বাংলাদেশের ঐতিহ্যবাহী রান্না — প্রতিটি আইটেম সাশ্রয়ী মূল্যে</p>
+        </div>
+        <!-- Category Tabs -->
+        <div class="flex flex-wrap justify-center gap-3 mb-12 reveal" style="transition-delay:.15s">
+            <button class="cat-tab active px-5 py-2.5 rounded-xl font-semibold text-sm border border-bark-200 text-bark-600 bg-white" data-cat="all">
+                <span class="iconify inline mr-1" data-icon="lucide:layout-grid"></span>সব
+            </button>
+            <button class="cat-tab px-5 py-2.5 rounded-xl font-semibold text-sm border border-bark-200 text-bark-600 bg-white" data-cat="bhat">
+                <span class="iconify inline mr-1" data-icon="lucide:wheat"></span>ভাত-ভর্তা-ডাল
+            </button>
+            <button class="cat-tab px-5 py-2.5 rounded-xl font-semibold text-sm border border-bark-200 text-bark-600 bg-white" data-cat="vaji">
+                <span class="iconify inline mr-1" data-icon="lucide:salad"></span>ভাজি-সবজি
+            </button>
+            <button class="cat-tab px-5 py-2.5 rounded-xl font-semibold text-sm border border-bark-200 text-bark-600 bg-white" data-cat="mach">
+                <span class="iconify inline mr-1" data-icon="lucide:fish"></span>মাছ-মাংস
+            </button>
+            <button class="cat-tab px-5 py-2.5 rounded-xl font-semibold text-sm border border-bark-200 text-bark-600 bg-white" data-cat="biriyani">
+                <span class="iconify inline mr-1" data-icon="lucide:flame"></span>বিরিয়ানি-খিচুড়ি
+            </button>
+            <button class="cat-tab px-5 py-2.5 rounded-xl font-semibold text-sm border border-bark-200 text-bark-600 bg-white" data-cat="dessert">
+                <span class="iconify inline mr-1" data-icon="lucide:cake-slice"></span>ডেজার্ট
+            </button>
+        </div>
+        <!-- Menu Grid -->
+        <div id="menuGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            <!-- JS will populate -->
+        </div>
+    </div>
+</section>
+
+<!-- ========== WHY CHOOSE US ========== -->
+<section class="py-20 md:py-28 bg-cream-dark relative overflow-hidden">
+    <div class="absolute inset-0 bengali-pattern"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 reveal">
+            <div class="bengali-divider text-primary text-sm font-semibold mb-4 max-w-xs mx-auto">
+                <span>কেন আমরা আলাদা</span>
+            </div>
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-bark-900 mb-4">
+                কেন বেছে নেবেন <span class="text-primary">পাংশি?</span>
+            </h2>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="reveal bg-white rounded-2xl p-8 border border-bark-100 hover:border-primary/20 hover:shadow-xl hover:shadow-red-50 transition-all duration-300 group" style="transition-delay:.1s">
+                <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                    <span class="iconify text-primary text-3xl group-hover:text-white transition-colors" data-icon="lucide:chef-hat"></span>
+                </div>
+                <h3 class="text-xl font-bold text-bark-900 mb-3">খাঁটি ঐতিহ্যবাহী স্বাদ</h3>
+                <p class="text-bark-500 leading-relaxed">প্রতিটি খাবার তৈরি হয় প্রজন্ম থেকে প্রজন্মে চলে আসা বাংলার ঐতিহ্যবাহী রেসিপি অনুসারে। কোনো আর্টিফিশিয়াল ফ্লেভার নেই।</p>
+            </div>
+            <div class="reveal bg-white rounded-2xl p-8 border border-bark-100 hover:border-primary/20 hover:shadow-xl hover:shadow-red-50 transition-all duration-300 group" style="transition-delay:.2s">
+                <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                    <span class="iconify text-primary text-3xl group-hover:text-white transition-colors" data-icon="lucide:wallet"></span>
+                </div>
+                <h3 class="text-xl font-bold text-bark-900 mb-3">সাশ্রয়ী মূল্য</h3>
+                <p class="text-bark-500 leading-relaxed">উচ্চমানের খাবার সবচেয়ে সাশ্রয়ী দামে। আমাদের লক্ষ্য সবার নাগালে বাংলার আসল স্বাদ পৌঁছে দেওয়া।</p>
+            </div>
+            <div class="reveal bg-white rounded-2xl p-8 border border-bark-100 hover:border-primary/20 hover:shadow-xl hover:shadow-red-50 transition-all duration-300 group" style="transition-delay:.3s">
+                <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                    <span class="iconify text-primary text-3xl group-hover:text-white transition-colors" data-icon="lucide:leaf"></span>
+                </div>
+                <h3 class="text-xl font-bold text-bark-900 mb-3">তাজা ও প্রাকৃতিক</h3>
+                <p class="text-bark-500 leading-relaxed">সকালের বাজার থেকে তাজা উপাদান, দেশি মশলা, খাঁটি ঘি — কোনো কম্প্রোমাইজ নয় মানের ব্যাপারে।</p>
+            </div>
+            <div class="reveal bg-white rounded-2xl p-8 border border-bark-100 hover:border-primary/20 hover:shadow-xl hover:shadow-red-50 transition-all duration-300 group" style="transition-delay:.4s">
+                <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                    <span class="iconify text-primary text-3xl group-hover:text-white transition-colors" data-icon="lucide:users"></span>
+                </div>
+                <h3 class="text-xl font-bold text-bark-900 mb-3">পারিবারিক পরিবেশ</h3>
+                <p class="text-bark-500 leading-relaxed">পরিবার নিয়ে বসে খাওয়ার মতো পরিচ্ছন্ন, শান্ত ও স্বাগতম পরিবেশ। বাচ্চা থেকে বয়স্ঠ — সবার জন্য।</p>
+            </div>
+            <div class="reveal bg-white rounded-2xl p-8 border border-bark-100 hover:border-primary/20 hover:shadow-xl hover:shadow-red-50 transition-all duration-300 group" style="transition-delay:.5s">
+                <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                    <span class="iconify text-primary text-3xl group-hover:text-white transition-colors" data-icon="lucide:truck"></span>
+                </div>
+                <h3 class="text-xl font-bold text-bark-900 mb-3">হোম ডেলিভারি</h3>
+                <p class="text-bark-500 leading-relaxed">চকবাজার ও আশপাশের এলাকায় দ্রুত হোম ডেলিভারি সুবিধা। WhatsApp এ অর্ডার করুন, ঘরে বসে খান।</p>
+            </div>
+            <div class="reveal bg-white rounded-2xl p-8 border border-bark-100 hover:border-primary/20 hover:shadow-xl hover:shadow-red-50 transition-all duration-300 group" style="transition-delay:.6s">
+                <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                    <span class="iconify text-primary text-3xl group-hover:text-white transition-colors" data-icon="lucide:heart"></span>
+                </div>
+                <h3 class="text-xl font-bold text-bark-900 mb-3">ভালোবাসায় তৈরি</h3>
+                <p class="text-bark-500 leading-relaxed">আমরা ব্যবসা করি না — আমরা মানুষকে খুশি করি। প্রতিটি প্লেটে থাকে আমাদের ভালোবাসা ও শ্রদ্ধা।</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== TESTIMONIALS ========== -->
+<section class="py-20 md:py-28 bg-bark-900 relative overflow-hidden">
+    <div class="absolute inset-0 bengali-pattern opacity-20"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px]"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 reveal">
+            <div class="bengali-divider text-primary-light text-sm font-semibold mb-4 max-w-xs mx-auto">
+                <span>গ্রাহকদের কথা</span>
+            </div>
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-4">
+                তারা কি <span class="text-primary-light">বলছেন?</span>
+            </h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="reveal bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-7 hover:border-primary/30 transition-all" style="transition-delay:.1s">
+                <div class="flex gap-1 mb-4">
+                    <span class="text-yellow-400 text-lg">★</span><span class="text-yellow-400 text-lg">★</span><span class="text-yellow-400 text-lg">★</span><span class="text-yellow-400 text-lg">★</span><span class="text-yellow-400 text-lg">★</span>
+                </div>
+                <p class="text-bark-200 leading-relaxed mb-6">"ভর্তা আর ভাতের যে স্বাদ পেলাম, মনে হচ্ছিল আমার মা রান্না করেছেন। অসাধারণ! ঢাকায় এমন খাবার খুঁজে পাওয়া কঠিন।"</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 bg-primary/20 rounded-full flex items-center justify-center text-primary-light font-bold">র</div>
+                    <div>
+                        <div class="text-white font-semibold">রহিমা বেগম</div>
+                        <div class="text-bark-400 text-sm">নিয়মিত গ্রাহক</div>
+                    </div>
+                </div>
+            </div>
+            <div class="reveal bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-7 hover:border-primary/30 transition-all" style="transition-delay:.2s">
+                <div class="flex gap-1 mb-4">
+                    <span class="text-yellow-400 text-lg">★</span><span class="text-yellow-400 text-lg">★</span><span class="text-yellow-400 text-lg">★</span><span class="text-yellow-400 text-lg">★</span><span class="text-yellow-400 text-lg">★</span>
+                </div>
+                <p class="text-bark-200 leading-relaxed mb-6">"কাচ্চি বিরিয়ানি একদম ফাটাফাটি! এত কম দামে এত ভালো বিরিয়ানি — আমি প্রতি সপ্তাহে আসি। পরিবেশও অনেক ভালো।"</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 bg-gold/20 rounded-full flex items-center justify-center text-gold font-bold">ক</div>
+                    <div>
+                        <div class="text-white font-semibold">কামরুল হাসান</div>
+                        <div class="text-bark-400 text-sm">ফুড ব্লগার</div>
+                    </div>
+                </div>
+            </div>
+            <div class="reveal bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-7 hover:border-primary/30 transition-all" style="transition-delay:.3s">
+                <div class="flex gap-1 mb-4">
+                    <span class="text-yellow-400 text-lg">★</span><span class="text-yellow-400 text-lg">★</span><span class="text-yellow-400 text-lg">★</span><span class="text-yellow-400 text-lg">★</span><span class="text-yellow-400/50 text-lg">★</span>
+                </div>
+                <p class="text-bark-200 leading-relaxed mb-6">"পরিবার নিয়ে এসেছিলাম, সবাই খুব পছন্দ করেছে। বাচ্চাদের জন্যও খাবার আছে। পরিষ্কার-পরিচ্ছন্ন পরিবেশ।"</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 bg-green-800/30 rounded-full flex items-center justify-center text-green-300 font-bold">ফ</div>
+                    <div>
+                        <div class="text-white font-semibold">ফাতেমা আক্তার</div>
+                        <div class="text-bark-400 text-sm">গ্রাহক</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== ABOUT ========== -->
+<section id="about" class="py-20 md:py-28 bengali-pattern texture-dots relative">
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <!-- Text -->
+            <div class="reveal order-2 lg:order-1">
+                <div class="bengali-divider text-primary text-sm font-semibold mb-4">
+                    <span>আমাদের গল্প</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-bark-900 leading-tight mb-6">
+                    একটি পরিবারের<br>
+                    <span class="text-primary">রান্নার গল্প</span>
+                </h2>
+                <div class="space-y-4 text-bark-500 leading-relaxed mb-8">
+                    <p>
+                        "The Panshi Restaurant" এর যাত্রা শুরু হয়েছিল একটি সাধারণ স্বপ্ন থেকে — বাংলাদেশের গ্রামগঞ্জের সেই আসল খাবারের স্বাদ শহরের মানুষের কাছে পৌঁছে দেওয়ার স্বপ্ন।
+                    </p>
+                    <p>
+                        আমাদের প্রতিষ্ঠাতা ছোটবেলা থেকে দেখেছেন কীভাবে দাদী সকাল বেলা উঠে শুকনা মরিচ পিঁড়ে ঘষে ভর্তা বানাতেন, কীভাবে মা ঈদের দিন সবার জন্য কাচ্চি বিরিয়ানি রান্না করতেন। সেই স্মৃতি, সেই ভালোবাসা — সবকিছু নিয়েই পাংশির জন্ম।
+                    </p>
+                    <p>
+                        আমরা বিশ্বাস করি, খাবার শুধু পেট ভরায় না — খাবার মন ভরায়, স্মৃতি তৈরি করে। তাই প্রতিটি খাবারে আমরা দিয়ে থাকি আমাদের পরিবারের সেই ভালোবাসা।
+                    </p>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-white rounded-xl p-5 border border-bark-100 text-center">
+                        <div class="text-3xl font-bold text-primary mb-1">২০১৩</div>
+                        <div class="text-sm text-bark-400">প্রতিষ্ঠিত</div>
+                    </div>
+                    <div class="bg-white rounded-xl p-5 border border-bark-100 text-center">
+                        <div class="text-3xl font-bold text-primary mb-1">১০,০০০+</div>
+                        <div class="text-sm text-bark-400">সন্তুষ্ট গ্রাহক</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Images -->
+            <div class="reveal order-1 lg:order-2" style="transition-delay:.2s">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80" alt="Restaurant Ambiance" class="w-full h-[350px] object-cover rounded-2xl shadow-xl">
+                    <img src="https://images.unsplash.com/photo-1596797038530-2c107229654b?w=400&q=80" alt="Bengali Cooking" class="absolute -bottom-8 -left-8 w-48 h-48 object-cover rounded-2xl shadow-2xl border-4 border-white hidden md:block">
+                    <div class="absolute -top-4 -right-4 w-20 h-20 bg-primary rounded-2xl flex items-center justify-center text-white shadow-xl" style="animation:float 3s ease-in-out infinite">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold">১০+</div>
+                            <div class="text-[10px]">বছর</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== CTA BANNER ========== -->
+<section class="relative py-20 overflow-hidden">
+    <div class="absolute inset-0">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1920&q=80" alt="Food Banner" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-primary/85"></div>
+    </div>
+    <div class="relative z-10 max-w-4xl mx-auto px-4 text-center reveal">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-6">
+            আজই অর্ডার করুন!
+        </h2>
+        <p class="text-white/80 text-lg mb-10 max-w-xl mx-auto">
+            WhatsApp এ মেসেজ করুন অথবা সরাসরি ফোন করুন — দ্রুত ডেলিভারি গ্যারান্টি!
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+            <a href="https://wa.me/8801XXXXXXXXX?text=আমি%20একটি%20অর্ডার%20করতে%20চাই" target="_blank"
+               class="inline-flex items-center gap-3 bg-white text-primary font-bold px-8 py-4 rounded-xl hover:bg-cream transition-colors shadow-2xl text-lg">
+                <span class="iconify text-2xl" data-icon="mdi:whatsapp"></span>
+                WhatsApp অর্ডার
+            </a>
+            <a href="tel:+8801XXXXXXXXX"
+               class="inline-flex items-center gap-3 bg-white/15 backdrop-blur-sm border-2 border-white text-white font-bold px-8 py-4 rounded-xl hover:bg-white/25 transition-colors text-lg">
+                <span class="iconify text-2xl" data-icon="lucide:phone-call"></span>
+                ফোন করুন
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ========== CONTACT ========== -->
+<section id="contact" class="py-20 md:py-28 bengali-pattern texture-dots">
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 reveal">
+            <div class="bengali-divider text-primary text-sm font-semibold mb-4 max-w-xs mx-auto">
+                <span>যোগাযোগ</span>
+            </div>
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-bark-900 mb-4">
+                আমাদের সাথে <span class="text-primary">যোগাযোগ</span> করুন
+            </h2>
+        </div>
+        <div class="grid lg:grid-cols-5 gap-8">
+            <!-- Info Cards -->
+            <div class="lg:col-span-2 space-y-5">
+                <div class="reveal bg-white rounded-2xl p-6 border border-bark-100 hover:shadow-lg transition-all" style="transition-delay:.1s">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <span class="iconify text-primary text-xl" data-icon="lucide:map-pin"></span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-bark-900 mb-1">ঠিকানা</h4>
+                            <p class="text-bark-500 text-sm leading-relaxed">বকশী বাজার রোড, চকবাজার, ঢাকা-১২০৩</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal bg-white rounded-2xl p-6 border border-bark-100 hover:shadow-lg transition-all" style="transition-delay:.2s">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <span class="iconify text-primary text-xl" data-icon="lucide:phone"></span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-bark-900 mb-1">ফোন</h4>
+                            <a href="tel:+8801XXXXXXXXX" class="text-primary font-semibold text-sm hover:underline">01XXXXXXXXX</a>
+                            <p class="text-bark-400 text-xs mt-1">সকাল ১০টা - রাত ১১টা</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal bg-white rounded-2xl p-6 border border-bark-100 hover:shadow-lg transition-all" style="transition-delay:.3s">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <span class="iconify text-primary text-xl" data-icon="lucide:clock"></span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-bark-900 mb-1">খোলার সময়</h4>
+                            <p class="text-bark-500 text-sm">সকাল ১০:০০ — রাত ১১:০০</p>
+                            <p class="text-bark-400 text-xs mt-1">শুক্রবার সকাল ১১:০০ থেকে</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal bg-white rounded-2xl p-6 border border-bark-100 hover:shadow-lg transition-all" style="transition-delay:.4s">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-blue-600/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <span class="iconify text-blue-600 text-xl" data-icon="mdi:facebook"></span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-bark-900 mb-1">Facebook</h4>
+                            <a href="#" class="text-blue-600 font-semibold text-sm hover:underline">The Panshi Restaurant</a>
+                            <p class="text-bark-400 text-xs mt-1">আমাদের পেজে লাইক দিন</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Contact Form + Map -->
+            <div class="lg:col-span-3 space-y-6">
+                <div class="reveal bg-white rounded-2xl p-7 border border-bark-100" style="transition-delay:.2s">
+                    <h3 class="text-xl font-bold text-bark-900 mb-5">মেসেজ পাঠান</h3>
+                    <form id="contactForm" class="space-y-4">
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-bark-600 mb-1.5">আপনার নাম</label>
+                                <input type="text" required placeholder="নাম লিখুন" class="w-full px-4 py-3 rounded-xl border border-bark-200 bg-cream/50 text-bark-800 placeholder:text-bark-300 text-sm transition-all">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-bark-600 mb-1.5">ফোন নম্বর</label>
+                                <input type="tel" required placeholder="০১XXXXXXXXX" class="w-full px-4 py-3 rounded-xl border border-bark-200 bg-cream/50 text-bark-800 placeholder:text-bark-300 text-sm transition-all">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-bark-600 mb-1.5">বিষয়</label>
+                            <select class="w-full px-4 py-3 rounded-xl border border-bark-200 bg-cream/50 text-bark-800 text-sm transition-all">
+                                <option>সাধারণ জিজ্ঞাসা</option>
+                                <option>অর্ডার সম্পর্কে</option>
+                                <option>রিজার্ভেশন</option>
+                                <option>মতামত / অভিযোগ</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-bark-600 mb-1.5">মেসেজ</label>
+                            <textarea rows="4" required placeholder="আপনার মেসেজ লিখুন..." class="w-full px-4 py-3 rounded-xl border border-bark-200 bg-cream/50 text-bark-800 placeholder:text-bark-300 text-sm transition-all resize-none"></textarea>
+                        </div>
+                        <button type="submit" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white font-bold px-8 py-3.5 rounded-xl transition-all shadow-lg hover:shadow-xl text-sm">
+                            <span class="iconify" data-icon="lucide:send"></span>
+                            পাঠিয়ে দিন
+                        </button>
+                    </form>
+                </div>
+                <!-- Map -->
+                <div class="reveal rounded-2xl overflow-hidden border border-bark-100 shadow-lg" style="transition-delay:.35s">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3652.263735003832!2d90.39682487524588!3d23.739344278678445!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8f0d6b9e6a1%3A0x3e0c09c0e4f1e5a0!2sChakbazar%2C%20Dhaka!5e0!3m2!1sen!2sbd!4v1700000000000!5m2!1sen!2sbd"
+                        width="100%" height="280" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                        class="w-full">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="bg-bark-900 relative overflow-hidden">
+    <div class="absolute inset-0 bengali-pattern opacity-15"></div>
+    <div class="relative z-10">
+        <!-- Main Footer -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+                <!-- Brand -->
+                <div class="lg:col-span-1">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-11 h-11 bg-primary rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">প</span>
+                        </div>
+                        <div>
+                            <div class="text-white font-bold text-lg leading-tight">The Panshi</div>
+                            <div class="text-bark-400 text-[10px] uppercase tracking-[0.2em]">Restaurant</div>
+                        </div>
+                    </div>
+                    <p class="text-bark-400 text-sm leading-relaxed mb-6">সাধ্যের মধ্যে বাংলা খাবারের আসল স্বাদ। ঐতিহ্য, ভালোবাসা আর স্বাদের এক অনন্য মিলন।</p>
+                    <div class="flex gap-3">
+                        <a href="#" class="w-10 h-10 bg-white/5 hover:bg-primary rounded-xl flex items-center justify-center transition-colors group">
+                            <span class="iconify text-bark-400 group-hover:text-white transition-colors text-lg" data-icon="mdi:facebook"></span>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/5 hover:bg-primary rounded-xl flex items-center justify-center transition-colors group">
+                            <span class="iconify text-bark-400 group-hover:text-white transition-colors text-lg" data-icon="mdi:instagram"></span>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/5 hover:bg-green-600 rounded-xl flex items-center justify-center transition-colors group">
+                            <span class="iconify text-bark-400 group-hover:text-white transition-colors text-lg" data-icon="mdi:whatsapp"></span>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/5 hover:bg-red-600 rounded-xl flex items-center justify-center transition-colors group">
+                            <span class="iconify text-bark-400 group-hover:text-white transition-colors text-lg" data-icon="mdi:youtube"></span>
+                        </a>
+                    </div>
+                </div>
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-white font-bold mb-5">দ্রুত লিংক</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-bark-400 hover:text-primary-light transition-colors text-sm flex items-center gap-2"><span class="iconify text-xs" data-icon="lucide:chevron-right"></span>হোম</a></li>
+                        <li><a href="#menu" class="text-bark-400 hover:text-primary-light transition-colors text-sm flex items-center gap-2"><span class="iconify text-xs" data-icon="lucide:chevron-right"></span>মেনু</a></li>
+                        <li><a href="#about" class="text-bark-400 hover:text-primary-light transition-colors text-sm flex items-center gap-2"><span class="iconify text-xs" data-icon="lucide:chevron-right"></span>আমাদের সম্পর্কে</a></li>
+                        <li><a href="#contact" class="text-bark-400 hover:text-primary-light transition-colors text-sm flex items-center gap-2"><span class="iconify text-xs" data-icon="lucide:chevron-right"></span>যোগাযোগ</a></li>
+                    </ul>
+                </div>
+                <!-- Menu Categories -->
+                <div>
+                    <h4 class="text-white font-bold mb-5">মেনু ক্যাটাগরি</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#menu" class="text-bark-400 hover:text-primary-light transition-colors text-sm flex items-center gap-2"><span class="iconify text-xs" data-icon="lucide:chevron-right"></span>ভাত-ভর্তা-ডাল</a></li>
+                        <li><a href="#menu" class="text-bark-400 hover:text-primary-light transition-colors text-sm flex items-center gap-2"><span class="iconify text-xs" data-icon="lucide:chevron-right"></span>ভাজি-সবজি</a></li>
+                        <li><a href="#menu" class="text-bark-400 hover:text-primary-light transition-colors text-sm flex items-center gap-2"><span class="iconify text-xs" data-icon="lucide:chevron-right"></span>মাছ-মাংস</a></li>
+                        <li><a href="#menu" class="text-bark-400 hover:text-primary-light transition-colors text-sm flex items-center gap-2"><span class="iconify text-xs" data-icon="lucide:chevron-right"></span>বিরিয়ানি-খিচুড়ি</a></li>
+                        <li><a href="#menu" class="text-bark-400 hover:text-primary-light transition-colors text-sm flex items-center gap-2"><span class="iconify text-xs" data-icon="lucide:chevron-right"></span>ডেজার্ট</a></li>
+                    </ul>
+                </div>
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="text-white font-bold mb-5">যোগাযোগ</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <span class="iconify text-primary-light mt-0.5 flex-shrink-0" data-icon="lucide:map-pin"></span>
+                            <span class="text-bark-400 text-sm">বকশী বাজার রোড, চকবাজার, ঢাকা</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="iconify text-primary-light flex-shrink-0" data-icon="lucide:phone"></span>
+                            <a href="tel:+8801XXXXXXXXX" class="text-bark-400 hover:text-primary-light transition-colors text-sm">01XXXXXXXXX</a>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="iconify text-primary-light flex-shrink-0" data-icon="lucide:clock"></span>
+                            <span class="text-bark-400 text-sm">সকাল ১০:০০ — রাত ১১:০০</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Bottom Bar -->
+        <div class="border-t border-white/10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+                <p class="text-bark-500 text-sm">© ২০২৫ The Panshi Restaurant। সর্বস্বত্ব সংরক্ষিত।</p>
+                <p class="text-bark-600 text-xs">ভালোবাসায় তৈরি 🇧🇩</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- ========== JAVASCRIPT ========== -->
+<script>
+// ===== MENU DATA =====
+const menuData = [
+    // ভাত-ভর্তা-ডাল
+    {name:'ভাত',price:20,cat:'bhat',img:'https://images.unsplash.com/photo-1596797038530-2c107229654b?w=400&q=80',desc:'সাদা ভাত',popular:false},
+    {name:'মুগ ডাল',price:40,cat:'bhat',img:'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&q=80',desc:'ঘি দিয়ে তৈরি',popular:false},
+    {name:'মাসকালাই ডাল',price:50,cat:'bhat',img:'https://images.unsplash.com/photo-1595587870672-c79b47d21b74?w=400&q=80',desc:'ঝাল-মিষ্টি',popular:false},
+    {name:'শুকনা মরিচের ভর্তা',price:30,cat:'bhat',img:'https://images.unsplash.com/photo-1564834744159-ff0ea41ba4b9?w=400&q=80',desc:'নারকেল তেলে',popular:true},
+    {name:'পেঁয়াজ ভর্তা',price:25,cat:'bhat',img:'https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?w=400&q=80',desc:'সরিষার তেলে',popular:false},
+    {name:'টমেটো ভর্তা',price:30,cat:'bhat',img:'https://images.unsplash.com/photo-1558896399-51e3e4898b34?w=400&q=80',desc:'তাজা টমেটো',popular:false},
+    {name:'শসা ভর্তা',price:25,cat:'bhat',img:'https://images.unsplash.com/photo-1607532941433-304659e8198a?w=400&q=80',desc:'ধনেপাতা দিয়ে',popular:false},
+    {name:'আলু বড়া',price:30,cat:'bhat',img:'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=400&q=80',desc:'কড়া ভাজা',popular:false},
+    // ভাজি-সবজি
+    {name:'আলু পোড়া',price:50,cat:'vaji',img:'https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=400&q=80',desc:'ভুনা মশলায়',popular:true},
+    {name:'পটল ভর্তা',price:60,cat:'vaji',img:'https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400&q=80',desc:'দেশি পটল',popular:false},
+    {name:'লাউ চিংড়ি',price:70,cat:'vaji',img:'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&q=80',desc:'সুস্বাদু রেসিপি',popular:false},
+    {name:'ঝিঙে আলু ভুনা',price:60,cat:'vaji',img:'https://images.unsplash.com/photo-1574484284002-952d92456975?w=400&q=80',desc:'ঝাল ঝাল',popular:false},
+    {name:'কলমি শাক ভাজি',price:50,cat:'vaji',img:'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=400&q=80',desc:'দেশি কলমি',popular:false},
+    {name:'বেগুন ভাজা',price:40,cat:'vaji',img:'https://images.unsplash.com/photo-1615484477778-ca3b77940c25?w=400&q=80',desc:'কড়া বেগুন',popular:false},
+    // মাছ-মাংস
+    {name:'ইলিশ মাছ ভাজা',price:250,cat:'mach',img:'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=400&q=80',desc:'পদ্মার তাজা ইলিশ',popular:true},
+    {name:'রুই মাছের তরকারি',price:200,cat:'mach',img:'https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?w=400&q=80',desc:'ঘন ঝোলে',popular:false},
+    {name:'কাতলা মাছের ঝোল',price:220,cat:'mach',img:'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400&q=80',desc:'সরিষা তেলে',popular:false},
+    {name:'মুরগির রোস্ট',price:180,cat:'mach',img:'https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&q=80',desc:'দেশি মুরগি',popular:true},
+    {name:'মাটন কষা',price:300,cat:'mach',img:'https://images.unsplash.com/photo-1645696996762-9a0536546e23?w=400&q=80',desc:'ঘন মশলায়',popular:true},
+    {name:'খাসির গোশত ভুনা',price:350,cat:'mach',img:'https://images.unsplash.com/photo-1606491956689-2ea866880049?w=400&q=80',desc:'ঐতিহ্যবাহী',popular:false},
+    // বিরিয়ানি-খিচুড়ি
+    {name:'কাচ্চি বিরিয়ানি',price:250,cat:'biriyani',img:'https://images.unsplash.com/photo-1633945274405-b6c8069047b0?w=400&q=80',desc:'খাঁটি ঘি ও মশলায়',popular:true},
+    {name:'মাটন বিরিয়ানি',price:300,cat:'biriyani',img:'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&q=80',desc:'মাটন দিয়ে',popular:true},
+    {name:'মুরগির পোলাও',price:200,cat:'biriyani',img:'https://images.unsplash.com/photo-1642821373181-696a54913e93?w=400&q=80',desc:'দেশি পোলাও',popular:false},
+    {name:'খিচুড়ি',price:120,cat:'biriyani',img:'https://images.unsplash.com/photo-1596797038530-2c107229654b?w=400&q=80',desc:'ভেজ খিচুড়ি',popular:false},
+    {name:'তেহারি',price:150,cat:'biriyani',img:'https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?w=400&q=80',desc:'মুরগির তেহারি',popular:false},
+    // ডেজার্ট
+    {name:'মিষ্টি পায়েস',price:80,cat:'dessert',img:'https://images.unsplash.com/photo-1571009110791-70a93e9c1a16?w=400&q=80',desc:'চালের পায়েস',popular:true},
+    {name:'ফিরনি',price:60,cat:'dessert',img:'https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400&q=80',desc:'দুধের ফিরনি',popular:false},
+    {name:'রসগোল্লা',price:40,cat:'dessert',img:'https://images.unsplash.com/photo-1601303516822-tried7a8e5b1?w=400&q=80',desc:'নরম রসগোল্লা',popular:false},
+    {name:'সন্দেশ',price:50,cat:'dessert',img:'https://images.unsplash.com/photo-1666190050267-af5637631955?w=400&q=80',desc:'প্রাকৃতিক',popular:false},
+    {name:'ঘোল',price:30,cat:'dessert',img:'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=400&q=80',desc:'ঠাণ্ডা ঘোল',popular:false},
+];
+
+// ===== RENDER MENU =====
+function renderMenu(category = 'all') {
+    const grid = document.getElementById('menuGrid');
+    const items = category === 'all' ? menuData : menuData.filter(i => i.cat === category);
+    grid.innerHTML = '';
+    items.forEach((item, idx) => {
+        const card = document.createElement('div');
+        card.className = 'menu-card bg-white rounded-2xl border border-bark-100 overflow-hidden group';
+        card.style.animation = `fadeUp 0.5s ease-out ${idx * 0.05}s both`;
+        card.innerHTML = `
+            <div class="relative h-44 overflow-hidden bg-bark-100">
+                <img src="${item.img}" alt="${item.name}" class="w-full h-full object-cover m-img" loading="lazy" onerror="this.style.display='none'">
+                ${item.popular ? '<div class="absolute top-2.5 left-2.5 bg-primary text-white text-[10px] font-bold px-2.5 py-1 rounded-full popular-badge">⭐ জনপ্রিয়</div>' : ''}
+            </div>
+            <div class="p-4">
+                <div class="flex items-start justify-between gap-2 mb-1">
+                    <h3 class="font-bold text-bark-900 leading-tight">${item.name}</h3>
+                    <span class="text-primary font-bold text-lg whitespace-nowrap">৳${item.price}</span>
+                </div>
+                <p class="text-bark-400 text-xs mb-3">${item.desc}</p>
+                <a href="https://wa.me/8801XXXXXXXXX?text=আমি%20${encodeURIComponent(item.name)}%20অর্ডার%20করতে%20চাই" target="_blank"
+                   class="flex items-center justify-center gap-2 w-full bg-bark-900 hover:bg-primary text-white text-xs font-semibold py-2.5 rounded-lg transition-all">
+                    <span class="iconify text-sm" data-icon="mdi:whatsapp"></span>অর্ডার করুন
+                </a>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+// ===== CATEGORY TABS =====
+document.querySelectorAll('.cat-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+        document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        renderMenu(tab.dataset.cat);
+    });
+});
+
+// Initial render
+renderMenu();
+
+// ===== NAVBAR SCROLL =====
+const navbar = document.getElementById('navbar');
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (y > 50) {
+        navbar.classList.add('bg-white/95', 'backdrop-blur-xl', 'shadow-lg', 'shadow-bark-900/5');
+        navbar.classList.remove('bg-transparent');
+    } else {
+        navbar.classList.remove('bg-white/95', 'backdrop-blur-xl', 'shadow-lg', 'shadow-bark-900/5');
+    }
+    lastScroll = y;
+});
+
+// ===== ACTIVE NAV LINK =====
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-link[data-section]');
+window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+        const top = s.offsetTop - 120;
+        if (window.scrollY >= top) current = s.id;
+    });
+    navLinks.forEach(l => {
+        l.classList.remove('active');
+        if (l.dataset.section === current) l.classList.add('active');
+    });
+});
+
+// ===== MOBILE MENU =====
+const mobileMenu = document.getElementById('mobileMenu');
+const menuOverlay = document.getElementById('menuOverlay');
+const menuToggle = document.getElementById('menuToggle');
+const menuClose = document.getElementById('menuClose');
+
+function openMenu() {
+    mobileMenu.classList.add('open');
+    menuOverlay.classList.remove('hidden');
+    requestAnimationFrame(() => menuOverlay.style.opacity = '1');
+    document.body.style.overflow = 'hidden';
+}
+function closeMenu() {
+    mobileMenu.classList.remove('open');
+    menuOverlay.style.opacity = '0';
+    setTimeout(() => menuOverlay.classList.add('hidden'), 300);
+    document.body.style.overflow = '';
+}
+menuToggle.addEventListener('click', openMenu);
+menuClose.addEventListener('click', closeMenu);
+menuOverlay.addEventListener('click', closeMenu);
+document.querySelectorAll('.mobile-nav-link').forEach(l => l.addEventListener('click', closeMenu));
+
+// ===== SCROLL REVEAL =====
+const revealEls = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+        }
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+revealEls.forEach(el => revealObserver.observe(el));
+
+// ===== CONTACT FORM =====
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    showToast('আপনার মেসেজ সফলভাবে পাঠানো হয়েছে! আমরা শীঘ্রই যোগাযোগ করব।');
+    this.reset();
+});
+
+// ===== TOAST =====
+function showToast(msg) {
+    const toast = document.getElementById('toast');
+    document.getElementById('toastMsg').textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 4000);
+}
+
+// ===== NAVBAR INITIAL STATE =====
+navbar.classList.add('bg-transparent');
+</script>
+
+</body>
+</html>
